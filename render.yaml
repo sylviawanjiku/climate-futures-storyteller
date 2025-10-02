@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: climate-futures-storyteller
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python web_interface.py
+    envVars:
+      - key: PORT
+        value: 5000

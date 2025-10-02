@@ -1,0 +1,42 @@
+name: Deploy Climate Futures Storyteller
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Test application
+        run: |
+          python -c "from climate_storyteller import ClimateStoryteller; print('Import successful')"
+          python -c "from web_interface import app; print('Web interface import successful')"
+
+  deploy-render:
+    if: github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy to Render
+        run: |
+          echo "Deployment to Render will be handled automatically when code is pushed to main branch"
+          echo "Make sure your Render service is connected to this repository"
