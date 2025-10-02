@@ -183,11 +183,38 @@ class ClimateStoryteller:
                 "started farming after a career change, embracing sustainable practices",
                 "grew up in the countryside, now teaching others about adaptation",
             ],
+            "pregnant_woman": [
+                "discovered she was pregnant just as the climate impacts became more severe",
+                "had her first child during a drought, now expecting her second during floods",
+                "moved to the city for better healthcare, but climate change is making access difficult",
+            ],
+            "new_mother": [
+                "gave birth during the worst heatwave in years, now caring for her newborn",
+                "had her baby during flooding season, learning to navigate motherhood in crisis",
+                "became a mother in a time of climate uncertainty, adapting daily to new challenges",
+            ],
+            "healthcare_worker": [
+                "trained as a community health worker to serve her community during climate crises",
+                "became a midwife to help women give birth safely despite climate challenges",
+                "works as a nurse, seeing firsthand how climate change affects maternal health",
+            ],
         }
 
         return random.choice(
             backgrounds.get(character_focus, ["adapting to changing times"])
         )
+
+    def _get_pregnancy_stage(self, character: Dict) -> str:
+        """Get pregnancy stage description for maternal health stories."""
+        stages = [
+            "in her first trimester",
+            "in her second trimester",
+            "in her third trimester",
+            "expecting her first child",
+            "carrying her second child",
+            "pregnant with twins",
+        ]
+        return random.choice(stages)
 
     def _generate_story_structure(
         self, character: Dict, region_data: Dict, climate_impact: str
@@ -259,7 +286,44 @@ class ClimateStoryteller:
                 "Learning to Live with Fire",
                 "The Fire Keepers",
             ],
+            "flooding_events": [
+                "When the Roads Disappeared",
+                "The Water Between Us",
+                "Flooded Paths, Open Hearts",
+                "Rising Waters, Rising Hope",
+            ],
+            "vector_borne_diseases": [
+                "The Buzz of Danger",
+                "When Mosquitoes Multiply",
+                "Protecting Two Lives",
+                "The Invisible Threat",
+            ],
         }
+
+        # Special titles for maternal health stories
+        if character.get("profession") in ["pregnant_woman", "new_mother"]:
+            maternal_titles = {
+                "flooding_events": [
+                    "The Road to the Clinic",
+                    "When Water Blocks the Way",
+                    "Flooded Paths, Mother's Heart",
+                    "The Journey Through Water",
+                ],
+                "extreme_heat": [
+                    "The Heat of New Life",
+                    "When the Sun Burns Too Bright",
+                    "Cooling the Fire Within",
+                    "The Longest Summer",
+                ],
+                "vector_borne_diseases": [
+                    "The Buzz of Fear",
+                    "Protecting Two Hearts",
+                    "When Mosquitoes Threaten Life",
+                    "The Invisible Enemy",
+                ],
+            }
+            if climate_impact in maternal_titles:
+                return random.choice(maternal_titles[climate_impact])
 
         return random.choice(titles.get(climate_impact, ["Adapting to Change"]))
 
@@ -272,7 +336,25 @@ class ClimateStoryteller:
             "drought": f"The sound of water is different now. {character['name']} remembers when the river used to rush past their window, but today it's just a trickle, and the silence is deafening.",
             "extreme_heat": f"At 6 AM, the air already feels like a warm blanket. {character['name']} steps outside and immediately feels the weight of the day ahead, knowing that by noon, the streets will be empty and the city will retreat indoors.",
             "wildfire": f"The sky is orange again today. {character['name']} has learned to read the color of the horizon like a weather forecast, and this particular shade means another day of staying inside, windows closed against the smoke.",
+            "flooding_events": f"The rain started three days ago, and now {character['name']} watches the water rise around their home, knowing that today's antenatal appointment might be impossible to reach.",
+            "vector_borne_diseases": f"The mosquitoes are worse this year, and {character['name']} feels their constant buzz as a threat to the life growing inside her, knowing that malaria during pregnancy can be devastating.",
         }
+
+        # Special opening for maternal health scenarios
+        if character.get("profession") in [
+            "pregnant_woman",
+            "new_mother",
+        ] and climate_impact in [
+            "flooding_events",
+            "extreme_heat",
+            "vector_borne_diseases",
+        ]:
+            if climate_impact == "flooding_events":
+                return f"The water has cut off the road to the clinic again. {character['name']}, {self._get_pregnancy_stage(character)}, feels her baby kick as she watches the floodwaters rise, wondering how she'll make it to her antenatal appointment."
+            elif climate_impact == "extreme_heat":
+                return f"The heat is unbearable today, and {character['name']} feels her body struggling under the weight of both pregnancy and the scorching sun, knowing that heat stress can be dangerous for her unborn child."
+            elif climate_impact == "vector_borne_diseases":
+                return f"The mosquitoes are relentless this season, and {character['name']} feels their constant presence as a threat to her pregnancy, knowing that malaria can cause complications for both her and her baby."
 
         return opening_templates.get(
             climate_impact, f"{character['name']} wakes up to another day of change."
@@ -344,7 +426,20 @@ class ClimateStoryteller:
             "drought": f"{character['name']} has learned to measure water in drops, not gallons. The garden that once fed the family now struggles to survive, and the community well runs dry by mid-summer.",
             "extreme_heat": f"The heat has reshaped {character['name']}'s entire day. Work starts at dawn and ends by noon, and the afternoons are spent in whatever cool place can be found.",
             "wildfire": f"Every summer, {character['name']} keeps a bag packed by the door. The evacuation orders come with little warning, and the smoke makes it hard to breathe even when the flames are miles away.",
+            "flooding_events": f"The roads to the clinic are impassable again, and {character['name']} worries about missing critical antenatal appointments. The floodwaters have cut off access to healthcare when it's needed most.",
+            "vector_borne_diseases": f"The mosquitoes are relentless this season, and {character['name']} feels their constant presence as a threat to her pregnancy, knowing that malaria can cause complications for both her and her baby.",
         }
+
+        # Special challenges for maternal health scenarios
+        if character.get("profession") in ["pregnant_woman", "new_mother"]:
+            maternal_challenges = {
+                "flooding_events": f"The floodwaters have cut off the road to the clinic, and {character['name']}, {self._get_pregnancy_stage(character)}, worries about missing her antenatal appointment. She can feel her baby kick as she watches the water rise, wondering how she'll get the care she needs.",
+                "extreme_heat": f"The heat is unbearable, and {character['name']} feels her body struggling under the weight of both pregnancy and the scorching sun. She knows heat stress can be dangerous for her unborn child, but she must continue working to support her family.",
+                "vector_borne_diseases": f"The mosquitoes are worse this year, and {character['name']} feels their constant buzz as a threat to the life growing inside her. She knows malaria during pregnancy can cause premature birth, low birth weight, or even death for her baby.",
+            }
+            if climate_impact in maternal_challenges:
+                return maternal_challenges[climate_impact]
+
         return challenges.get(
             climate_impact, f"{character['name']} faces new challenges every day."
         )
@@ -364,7 +459,20 @@ class ClimateStoryteller:
             "drought": f"{character['name']} has become a master of water conservation, collecting every drop of rainwater and growing drought-resistant crops. The community shares resources and knowledge about sustainable farming.",
             "extreme_heat": f"The home has been retrofitted with better insulation and cooling systems that run on renewable energy. {character['name']} has learned to work with the heat, not against it.",
             "wildfire": f"The property has been cleared of flammable materials, and {character['name']} has learned to read the wind and weather patterns. The community has established early warning systems and evacuation plans.",
+            "flooding_events": f"The community has established emergency transport systems and mobile clinics that can reach flooded areas. {character['name']} has learned to identify safe routes and alternative healthcare options when the main roads are impassable.",
+            "vector_borne_diseases": f"The community has implemented comprehensive mosquito control measures and distributed insecticide-treated nets. {character['name']} has learned to protect herself and her family through proper net usage and environmental management.",
         }
+
+        # Special adaptations for maternal health scenarios
+        if character.get("profession") in ["pregnant_woman", "new_mother"]:
+            maternal_adaptations = {
+                "flooding_events": f"The community has established emergency transport systems and mobile clinics that can reach flooded areas. {character['name']} has learned to identify safe routes and alternative healthcare options when the main roads are impassable. Community health workers now make home visits during floods to ensure pregnant women receive the care they need.",
+                "extreme_heat": f"The community has set up cooling centers and shade structures where pregnant women can rest during the hottest parts of the day. {character['name']} has learned to adjust her work schedule and stay hydrated, while community health workers provide regular check-ups to monitor her and her baby's health.",
+                "vector_borne_diseases": f"The community has implemented comprehensive mosquito control measures and distributed insecticide-treated nets. {character['name']} has learned to protect herself and her unborn child through proper net usage, environmental management, and regular malaria prevention medication. Community health workers provide education and support to ensure safe pregnancies.",
+            }
+            if climate_impact in maternal_adaptations:
+                return maternal_adaptations[climate_impact]
+
         return adaptations.get(
             climate_impact, f"{character['name']} has found new ways to thrive."
         )

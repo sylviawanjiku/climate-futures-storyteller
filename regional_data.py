@@ -144,6 +144,78 @@ REGIONAL_CLIMATE_DATA = {
             "cultural_context": "Diverse neighborhoods, strong community organizations, innovation culture",
         }
     },
+    "sub_saharan_africa": {
+        "kenya": {
+            "climate_impacts": [
+                "extreme_heat",
+                "irregular_rainfall",
+                "flooding_events",
+                "drought_cycles",
+                "vector_borne_diseases",
+                "food_insecurity",
+            ],
+            "specific_details": {
+                "temperature_increase": "1.5-2.5°C by 2050",
+                "rainfall_variability": "Increased unpredictability, longer dry spells",
+                "flooding_frequency": "More frequent flash floods during rainy seasons",
+                "heat_wave_duration": "Extended periods of extreme heat, especially in arid regions",
+                "disease_impact": "Increased malaria, dengue, and other vector-borne diseases",
+                "adaptation_strategies": [
+                    "community_health_workers",
+                    "mobile_clinics",
+                    "early_warning_systems",
+                    "water_harvesting",
+                    "shade_structures",
+                    "cooling_centers",
+                ],
+                "healthcare_challenges": [
+                    "access_during_floods",
+                    "heat_stress_in_healthcare_facilities",
+                    "increased_disease_burden",
+                    "medication_storage_difficulties",
+                ],
+                "maternal_health_impacts": [
+                    "difficulty_reaching_healthcare_during_floods",
+                    "heat_stress_during_pregnancy",
+                    "increased_risk_of_premature_birth",
+                    "malnutrition_affecting_pregnancy_outcomes",
+                    "disease_exposure_during_pregnancy",
+                ],
+                "economic_impact": "Healthcare costs increase, agricultural productivity affected",
+                "community_response": "Community health networks, traditional knowledge integration, mobile health services",
+            },
+            "cultural_context": "Strong community bonds, traditional birth attendants, extended family support systems, matatu transport challenges",
+        },
+        "nairobi": {
+            "climate_impacts": [
+                "urban_heat_island",
+                "flash_flooding",
+                "air_pollution",
+                "water_scarcity",
+                "disease_outbreaks",
+            ],
+            "specific_details": {
+                "temperature_increase": "2-4°C above surrounding areas",
+                "flooding_risk": "Flash floods during heavy rains, especially in informal settlements",
+                "informal_settlements": "High vulnerability in slums like Kibera, Mathare",
+                "healthcare_access": "Challenges reaching hospitals during floods",
+                "adaptation_strategies": [
+                    "community_health_workers",
+                    "mobile_clinics",
+                    "flood_early_warning",
+                    "cooling_centers",
+                    "water_tanks",
+                ],
+                "maternal_health_focus": [
+                    "prenatal_care_during_floods",
+                    "postnatal_care_in_heat",
+                    "transport_to_hospitals",
+                    "home_birth_alternatives",
+                ],
+            },
+            "cultural_context": "Urban migration, informal economy, strong community networks, matatu culture",
+        }
+    },
 }
 
 CLIMATE_IMPACT_DESCRIPTIONS = {
@@ -166,6 +238,16 @@ CLIMATE_IMPACT_DESCRIPTIONS = {
         "sensory_details": "The acrid smell of smoke, the orange glow of distant flames, the ash that falls like snow",
         "daily_changes": "Evacuation bags always ready, different outdoor activities, new insurance concerns",
         "emotional_impact": "Constant vigilance, community support, resilience in the face of loss",
+    },
+    "flooding_events": {
+        "sensory_details": "The sound of rushing water, the smell of mud and debris, the sight of familiar paths transformed into rivers",
+        "daily_changes": "Alternative routes to work, elevated storage, emergency supplies always ready",
+        "emotional_impact": "Anxiety about safety, community solidarity, resilience in crisis",
+    },
+    "vector_borne_diseases": {
+        "sensory_details": "The constant buzz of mosquitoes, the smell of standing water, the sight of nets and repellents everywhere",
+        "daily_changes": "Mosquito nets, repellent application, avoiding standing water, different outdoor activities",
+        "emotional_impact": "Constant vigilance, fear of illness, community health awareness",
     },
 }
 
@@ -236,6 +318,81 @@ CHARACTER_TEMPLATES = {
             "water_harvesting",
             "diversification",
             "cooperative_farming",
+        ],
+    },
+    "pregnant_woman": {
+        "professions": [
+            "market_vendor",
+            "teacher",
+            "healthcare_worker",
+            "informal_worker",
+            "housewife",
+        ],
+        "ages": ["young_adult", "middle_aged"],
+        "backgrounds": ["urban_migrant", "rural_resident", "refugee", "local_community"],
+        "challenges": [
+            "accessing_healthcare_during_floods",
+            "heat_stress_during_pregnancy",
+            "malnutrition_from_drought",
+            "disease_exposure",
+            "transport_difficulties",
+        ],
+        "adaptations": [
+            "community_health_workers",
+            "mobile_clinics",
+            "home_visits",
+            "emergency_transport",
+            "nutritional_support",
+        ],
+    },
+    "new_mother": {
+        "professions": [
+            "market_vendor",
+            "teacher",
+            "healthcare_worker",
+            "informal_worker",
+            "housewife",
+        ],
+        "ages": ["young_adult", "middle_aged"],
+        "backgrounds": ["urban_migrant", "rural_resident", "refugee", "local_community"],
+        "challenges": [
+            "postnatal_care_in_heat",
+            "breastfeeding_difficulties",
+            "newborn_health_risks",
+            "recovery_in_extreme_weather",
+            "accessing_healthcare",
+        ],
+        "adaptations": [
+            "cooling_centers",
+            "community_support_networks",
+            "mobile_health_services",
+            "emergency_care",
+            "nutritional_support",
+        ],
+    },
+    "healthcare_worker": {
+        "professions": [
+            "community_health_worker",
+            "nurse",
+            "midwife",
+            "doctor",
+            "health_volunteer",
+        ],
+        "ages": ["young_adult", "middle_aged", "elderly"],
+        "backgrounds": ["local_trained", "urban_educated", "traditional_practitioner", "international_volunteer"],
+        "challenges": [
+            "reaching_patients_during_floods",
+            "working_in_heat_stress",
+            "increased_disease_burden",
+            "resource_shortages",
+            "transport_difficulties",
+        ],
+        "adaptations": [
+            "mobile_clinics",
+            "telemedicine",
+            "community_networks",
+            "emergency_protocols",
+            "resource_sharing",
         ],
     },
 }
